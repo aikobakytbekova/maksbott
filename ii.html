@@ -3,348 +3,295 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>День рождения Макса | Maks Bot</title>
+  <title>День рождения Макса</title>
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background: radial-gradient(circle at top, #2d2a72, #10101a 60%, #050509);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 25px;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top left, #ffe66d, transparent 30%),
+                  radial-gradient(circle at bottom right, #ff6bcb, transparent 35%),
+                  linear-gradient(135deg, #111827, #312e81, #7c3aed);
+      color: white;
       overflow-x: hidden;
     }
 
-    .stars {
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(#ffffff 1px, transparent 1px),
-        radial-gradient(#7df9ff 1px, transparent 1px);
-      background-size: 45px 45px, 80px 80px;
-      opacity: 0.25;
-      animation: moveStars 18s linear infinite;
-      z-index: -1;
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
     }
 
-    @keyframes moveStars {
-      from { transform: translateY(0); }
-      to { transform: translateY(80px); }
+    .bubble {
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(4px);
+      animation: float 7s infinite ease-in-out;
+    }
+
+    .bubble:nth-child(1) { width: 80px; height: 80px; top: 8%; left: 8%; }
+    .bubble:nth-child(2) { width: 45px; height: 45px; top: 18%; right: 12%; animation-delay: 1s; }
+    .bubble:nth-child(3) { width: 110px; height: 110px; bottom: 10%; right: 8%; animation-delay: 2s; }
+    .bubble:nth-child(4) { width: 55px; height: 55px; bottom: 18%; left: 10%; animation-delay: 3s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-22px); }
     }
 
     .card {
       width: 100%;
-      max-width: 900px;
-      background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 30px;
-      padding: 35px;
-      box-shadow: 0 0 45px rgba(125,249,255,0.2);
-      backdrop-filter: blur(16px);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      width: 250px;
-      height: 250px;
-      background: #7df9ff;
-      filter: blur(120px);
-      opacity: 0.35;
-      right: -80px;
-      top: -80px;
-    }
-
-    .badge {
-      display: inline-block;
-      background: linear-gradient(90deg, #7df9ff, #ff70d9);
-      color: #080812;
-      padding: 9px 18px;
-      border-radius: 999px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 30px;
-      align-items: center;
+      max-width: 430px;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 32px;
+      padding: 28px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(18px);
+      text-align: center;
       position: relative;
       z-index: 2;
     }
 
+    .badge {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
     h1 {
-      font-size: clamp(36px, 7vw, 76px);
-      line-height: 0.95;
-      margin-bottom: 20px;
+      font-size: 42px;
+      line-height: 1;
+      margin-bottom: 12px;
     }
 
-    h1 span {
-      color: #7df9ff;
-      text-shadow: 0 0 18px rgba(125,249,255,0.7);
-    }
+   h1 span {
+    display: block;
+    font-size: 58px;
+    background: linear-gradient(90deg, #fef08a, #fb7185, #a78bfa);
+    
+    -webkit-background-clip: text; /* для Chrome/Safari */
+    background-clip: text;         /* стандарт */
 
-    .text {
-      font-size: 19px;
-      line-height: 1.7;
-      color: #e8e8f5;
-      margin-bottom: 25px;
+    color: transparent;
+    text-shadow: none;
+}
+
+    .subtitle {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #f4f4f5;
+      margin-bottom: 24px;
     }
 
     .info {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 30px 0;
+      gap: 12px;
+      margin: 22px 0;
     }
 
-    .info-box {
-      background: rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 18px;
-      border: 1px solid rgba(255,255,255,0.15);
-    }
-
-    .info-box small {
-      color: #9defff;
-      display: block;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .info-box b {
-      font-size: 18px;
-    }
-
-    .bot {
-      text-align: center;
-    }
-
-    .robot {
-      width: 230px;
-      height: 260px;
-      margin: auto;
-      background: linear-gradient(145deg, #f2f7ff, #8bdcff);
-      border-radius: 45px;
-      position: relative;
-      box-shadow: 0 0 35px rgba(125,249,255,0.6);
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-14px); }
-    }
-
-    .robot::before {
-      content: "MAX BOT";
-      position: absolute;
-      top: -45px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #ff70d9;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 16px;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .eyes {
-      display: flex;
-      gap: 35px;
-      justify-content: center;
-      padding-top: 70px;
-    }
-
-    .eye {
-      width: 35px;
-      height: 35px;
-      background: #080812;
-      border-radius: 50%;
-      box-shadow: 0 0 15px #080812;
-    }
-
-    .mouth {
-      width: 90px;
-      height: 28px;
-      background: #080812;
-      border-radius: 0 0 30px 30px;
-      margin: 35px auto 0;
-    }
-
-    .antenna {
-      width: 8px;
-      height: 45px;
-      background: #7df9ff;
-      position: absolute;
-      top: -45px;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 10px;
-    }
-
-    .antenna::before {
-      content: "";
-      width: 24px;
-      height: 24px;
-      background: #ff70d9;
-      border-radius: 50%;
-      position: absolute;
-      top: -18px;
-      left: 50%;
-      transform: translateX(-50%);
-      box-shadow: 0 0 20px #ff70d9;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin-top: 20px;
-    }
-
-    .btn {
-      border: none;
-      border-radius: 16px;
-      padding: 15px 24px;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .btn-main {
-      background: linear-gradient(90deg, #7df9ff, #ff70d9);
-      color: #080812;
-    }
-
-    .btn-second {
-      background: rgba(255,255,255,0.12);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.25);
-    }
-
-    .btn:hover {
-      transform: translateY(-4px) scale(1.03);
-    }
-
-    .message {
-      margin-top: 25px;
-      padding: 22px;
+    .info-item {
+      background: rgba(255, 255, 255, 0.14);
       border-radius: 22px;
-      background: rgba(0,0,0,0.25);
-      border-left: 5px solid #7df9ff;
-      font-size: 18px;
-      line-height: 1.7;
+      padding: 15px;
+      text-align: left;
+      display: flex;
+      gap: 12px;
+      align-items: center;
     }
 
-    .footer {
-      text-align: center;
-      margin-top: 30px;
-      color: #bbb;
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.2);
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .info-item b {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .info-item p {
+      color: #e5e7eb;
       font-size: 14px;
     }
 
-    @media (max-width: 760px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
 
-      .info {
-        grid-template-columns: 1fr;
+    button, a.button {
+      border: none;
+      border-radius: 18px;
+      padding: 15px 12px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover, a.button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .yes {
+      background: #fef08a;
+      color: #111827;
+    }
+
+    .map {
+      background: rgba(255, 255, 255, 0.16);
+      color: white;
+    }
+
+    .footer {
+      margin-top: 22px;
+      font-size: 13px;
+      color: #e5e7eb;
+    }
+
+    .confetti {
+      position: fixed;
+      top: -20px;
+      width: 10px;
+      height: 16px;
+      background: #fef08a;
+      animation: fall 4s linear infinite;
+      opacity: 0.9;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 16px;
+        align-items: flex-start;
+        padding-top: 42px;
       }
 
       .card {
-        padding: 25px;
+        border-radius: 28px;
+        padding: 24px 20px;
       }
 
-      .bot {
-        margin-top: 35px;
+      h1 {
+        font-size: 34px;
+      }
+
+      h1 span {
+        font-size: 50px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .buttons {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
+  <div class="page">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
 
-  <main class="card">
-    <section class="hero">
-      <div>
-        <div class="badge">Секретная миссия: День рождения Макса</div>
-        <h1>День рождения<br><span>Макса!</span></h1>
+    <main class="card">
+      <div class="badge">🎉 Ты приглашён!</div>
 
-        <p class="text">
-          Внимание! Система радости активирована. Сегодня особенный повод —
-          день рождения Макса! Max Bot запускает главный праздничный протокол:
-          музыка, вкусняшки, улыбки и максимум веселья. Без тебя эта миссия
-          не будет выполнена!
-        </p>
+      <h1>День рождения <span>Макса</span></h1>
 
-        <div class="info">
-          <div class="info-box">
-            <small>Дата</small>
-            <b>20/05/2026</b>
-          </div>
-          <div class="info-box">
-            <small>Время</small>
-            <b>18:00</b>
-          </div>
-          <div class="info-box">
-            <small>Место</small>
-            <b>хзхзхз</b>
+      <p class="subtitle">
+        Будет весело, громко и очень вкусно. Приходи отмечать вместе с нами!
+      </p>
+
+      <section class="info">
+        <div class="info-item">
+          <div class="icon">📅</div>
+          <div>
+            <b>Дата</b>
+            <p>20 мая 2026 года</p>
           </div>
         </div>
 
-        <div class="buttons">
-          <button class="btn btn-main" onclick="showAnswer()">Я приду!</button>
-          <button class="btn btn-second" onclick="showWish()">Открыть поздравление</button>
+        <div class="info-item">
+          <div class="icon">⏰</div>
+          <div>
+            <b>Время</b>
+            <p>18:00</p>
+          </div>
         </div>
+
+        <div class="info-item">
+          <div class="icon">📍</div>
+          <div>
+            <b>Место</b>
+            <p>хзхз</p>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="icon">🎁</div>
+          <div>
+            <b>Дресс-код</b>
+            <p>Настроение — праздничное, стиль — свободный</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="buttons">
+        <button class="yes" onclick="alert('Супер! Макс будет рад 😎')">Я приду 🔥</button>
+        <a class="button map" href="https://maps.google.com" target="_blank">Открыть карту</a>
       </div>
 
-      <div class="bot">
-        <div class="robot">
-          <div class="antenna"></div>
-          <div class="eyes">
-            <div class="eye"></div>
-            <div class="eye"></div>
-          </div>
-          <div class="mouth"></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="message" id="message">
-      🤖 Привет! Я Maks Bot. Мой праздничный алгоритм показывает: ты — важный гость на дне рождения Макса!
-    </div>
-
-    <div class="footer">
-      Дресс-код: хорошее настроение • Заряд батареи: 100% • Уровень веселья: максимум
-    </div>
-  </main>
+      <p class="footer">До встречи на празднике! 🥳</p>
+    </main>
+  </div>
 
   <script>
-    function showAnswer() {
-      document.getElementById('message').innerHTML =
-        '🎉 Отлично! Max Bot сохранил твой ответ. Приходи с улыбкой, хорошим настроением и готовностью сделать день рождения Макса незабываемым!';
-    }
+    const colors = ['#fef08a', '#fb7185', '#60a5fa', '#34d399', '#c084fc'];
 
-    function showWish() {
-      document.getElementById('message').innerHTML =
-        '💙 Макс, с днём рождения! Пусть твоя жизнь работает без ошибок, мечты загружаются быстрее интернета, счастье обновляется каждый день, а рядом всегда будут люди, с которыми даже обычный день превращается в праздник!';
+    for (let i = 0; i < 35; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+      confetti.style.animationDelay = Math.random() * 4 + 's';
+      confetti.style.animationDuration = 3 + Math.random() * 4 + 's';
+      document.body.appendChild(confetti);
     }
   </script>
 </body>
