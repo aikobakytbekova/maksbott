@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>День рождения Макса | Maks Bot</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #2d2a72, #10101a 60%, #050509);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      overflow-x: hidden;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(#ffffff 1px, transparent 1px),
+        radial-gradient(#7df9ff 1px, transparent 1px);
+      background-size: 45px 45px, 80px 80px;
+      opacity: 0.25;
+      animation: moveStars 18s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes moveStars {
+      from { transform: translateY(0); }
+      to { transform: translateY(80px); }
+    }
+
+    .card {
+      width: 100%;
+      max-width: 900px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 30px;
+      padding: 35px;
+      box-shadow: 0 0 45px rgba(125,249,255,0.2);
+      backdrop-filter: blur(16px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: #7df9ff;
+      filter: blur(120px);
+      opacity: 0.35;
+      right: -80px;
+      top: -80px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(90deg, #7df9ff, #ff70d9);
+      color: #080812;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: clamp(36px, 7vw, 76px);
+      line-height: 0.95;
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      color: #7df9ff;
+      text-shadow: 0 0 18px rgba(125,249,255,0.7);
+    }
+
+    .text {
+      font-size: 19px;
+      line-height: 1.7;
+      color: #e8e8f5;
+      margin-bottom: 25px;
+    }
+
+    .info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin: 30px 0;
+    }
+
+    .info-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .info-box small {
+      color: #9defff;
+      display: block;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .info-box b {
+      font-size: 18px;
+    }
+
+    .bot {
+      text-align: center;
+    }
+
+    .robot {
+      width: 230px;
+      height: 260px;
+      margin: auto;
+      background: linear-gradient(145deg, #f2f7ff, #8bdcff);
+      border-radius: 45px;
+      position: relative;
+      box-shadow: 0 0 35px rgba(125,249,255,0.6);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-14px); }
+    }
+
+    .robot::before {
+      content: "MAX BOT";
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff70d9;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 16px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .eyes {
+      display: flex;
+      gap: 35px;
+      justify-content: center;
+      padding-top: 70px;
+    }
+
+    .eye {
+      width: 35px;
+      height: 35px;
+      background: #080812;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #080812;
+    }
+
+    .mouth {
+      width: 90px;
+      height: 28px;
+      background: #080812;
+      border-radius: 0 0 30px 30px;
+      margin: 35px auto 0;
+    }
+
+    .antenna {
+      width: 8px;
+      height: 45px;
+      background: #7df9ff;
+      position: absolute;
+      top: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 10px;
+    }
+
+    .antenna::before {
+      content: "";
+      width: 24px;
+      height: 24px;
+      background: #ff70d9;
+      border-radius: 50%;
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px #ff70d9;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 16px;
+      padding: 15px 24px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-main {
+      background: linear-gradient(90deg, #7df9ff, #ff70d9);
+      color: #080812;
+    }
+
+    .btn-second {
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .btn:hover {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .message {
+      margin-top: 25px;
+      padding: 22px;
+      border-radius: 22px;
+      background: rgba(0,0,0,0.25);
+      border-left: 5px solid #7df9ff;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .info {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 25px;
+      }
+
+      .bot {
+        margin-top: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <main class="card">
+    <section class="hero">
+      <div>
+        <div class="badge">Секретная миссия: День рождения Макса</div>
+        <h1>День рождения<br><span>Макса!</span></h1>
+
+        <p class="text">
+          Внимание! Система радости активирована. Сегодня особенный повод —
+          день рождения Макса! Max Bot запускает главный праздничный протокол:
+          музыка, вкусняшки, улыбки и максимум веселья. Без тебя эта миссия
+          не будет выполнена!
+        </p>
+
+        <div class="info">
+          <div class="info-box">
+            <small>Дата</small>
+            <b>20/05/2026</b>
+          </div>
+          <div class="info-box">
+            <small>Время</small>
+            <b>18:00</b>
+          </div>
+          <div class="info-box">
+            <small>Место</small>
+            <b>хзхзхз</b>
+          </div>
+        </div>
+
+        <div class="buttons">
+          <button class="btn btn-main" onclick="showAnswer()">Я приду!</button>
+          <button class="btn btn-second" onclick="showWish()">Открыть поздравление</button>
+        </div>
+      </div>
+
+      <div class="bot">
+        <div class="robot">
+          <div class="antenna"></div>
+          <div class="eyes">
+            <div class="eye"></div>
+            <div class="eye"></div>
+          </div>
+          <div class="mouth"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="message" id="message">
+      🤖 Привет! Я Maks Bot. Мой праздничный алгоритм показывает: ты — важный гость на дне рождения Макса!
+    </div>
+
+    <div class="footer">
+      Дресс-код: хорошее настроение • Заряд батареи: 100% • Уровень веселья: максимум
+    </div>
+  </main>
+
+  <script>
+    function showAnswer() {
+      document.getElementById('message').innerHTML =
+        '🎉 Отлично! Max Bot сохранил твой ответ. Приходи с улыбкой, хорошим настроением и готовностью сделать день рождения Макса незабываемым!';
+    }
+
+    function showWish() {
+      document.getElementById('message').innerHTML =
+        '💙 Макс, с днём рождения! Пусть твоя жизнь работает без ошибок, мечты загружаются быстрее интернета, счастье обновляется каждый день, а рядом всегда будут люди, с которыми даже обычный день превращается в праздник!';
+    }
+  </script>
+</body>
+</html>
